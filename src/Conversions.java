@@ -13,17 +13,40 @@ public class Conversions {
 		return sb.reverse().toString();
 	}
 	
+	public static String binaryToDecimal(String n)
+	{
+		int power = 0;
+		long output = 0;
+		Long lastDigit;
+		StringBuilder sb = new StringBuilder(n);
+		
+		while(!(sb.toString()).equals(""))
+		{
+			lastDigit = Long.parseLong(sb.substring(sb.length()-1));
+			output += lastDigit*(Math.pow(2, power));
+			sb.deleteCharAt(sb.length()-1);
+			power++;
+		}
+		return "" + output;
+	}
+	
 	public static void main(String[] args)
 	{
 		Scanner kb = new Scanner(System.in);
 		System.out.println("Please type BtD to convert from Binary to Decimal, and DtB to convert from Decimal to Binary.");
 		String input = kb.nextLine();
 		System.out.println("What number would you like to convert?");
-		long number = Long.parseLong(kb.nextLine());
+		
 		if(input.equalsIgnoreCase("btd"))
-			System.out.println();	
+		{
+			String toConvert = kb.nextLine();
+			System.out.println(binaryToDecimal((toConvert)));
+		}
 		else if(input.contentEquals("dtb"))
-			System.out.println(decimalToBinary(number));
+		{
+			Long toConvert = kb.nextLong();
+			System.out.println(decimalToBinary(toConvert));
+		}
 		kb.close();
 	}
 
